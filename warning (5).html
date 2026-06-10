@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FS Predictor — Warning</title>
+
+<style>
+body{
+  font-family: monospace;
+  background:#020617;
+  color:#00ff9f;
+  text-align:center;
+  padding:15px;
+}
+
+/* WARNING BOX */
+.warning-box{
+  max-width:900px;
+  margin:50px auto;
+  padding:16px 20px;
+  background:#111;
+  border-left:6px solid #22c55e;
+  border-radius:12px;
+  font-size:15px;
+  line-height:1.6;
+  box-shadow:0 8px 20px rgba(0,255,159,0.2);
+}
+
+/* PAYMENT BOX */
+.payment-box{
+  max-width:520px;
+  margin:30px auto;
+  padding:22px;
+  background:#111;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,255,159,0.15);
+  line-height:1.9;
+}
+
+/* VIP BOX */
+.vip-box{
+  border:2px solid gold;
+  box-shadow:0 8px 25px rgba(255,215,0,0.25);
+}
+
+.payment-box h2{
+  margin-bottom:15px;
+}
+
+/* BUTTONS */
+.open-bot-btn,
+.copy-btn,
+.vip-btn,
+.whatsapp-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:12px 24px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.25s;
+  text-decoration:none;
+}
+
+/* NORMAL BUTTON */
+.open-bot-btn{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#000;
+  box-shadow:0 10px 22px rgba(34,197,94,0.35);
+}
+
+.open-bot-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* COPY BUTTON */
+.copy-btn{
+  background:#22c55e;
+  color:#000;
+}
+
+/* VIP BUTTON */
+.vip-btn{
+  background:linear-gradient(135deg,gold,#facc15);
+  color:#000;
+  box-shadow:0 10px 24px rgba(255,215,0,0.35);
+}
+
+.vip-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-btn{
+  background:#25D366;
+  color:white;
+  box-shadow:0 10px 22px rgba(37,211,102,0.35);
+}
+
+.whatsapp-btn:hover{
+  transform:translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="warning-box">
+⚠️ <strong>Risk Disclaimer:</strong> FS Predictor provides probability-based signals.
+Results may vary. Always trade responsibly.
+</div>
+
+<!-- NORMAL PAYMENT -->
+<div class="payment-box">
+
+  <h2>💳 Normal Bot Access — 50¢</h2>
+
+  <p><strong>Receiver Name:</strong> Patricia Asiedu</p>
+
+  <p><strong>MoMo Number:</strong> 0534494604</p>
+
+  <p><strong>Network:</strong> MTN</p>
+
+  <p>Send payment proof via WhatsApp.</p>
+
+  <button class="copy-btn" onclick="copyNumber()">
+    📋 Copy Number
+  </button>
+
+  <br><br>
+
+  <a 
+  href="https://wa.me/233534494604?text=Hello%20I%20have%20completed%20the%20payment%20for%20the%20Normal%20FS%20Predictor%20Bot.%20Here%20is%20my%20payment%20proof."
+  target="_blank"
+  class="whatsapp-btn">
+    📩 Send Proof
+  </a>
+
+  <br><br>
+
+  <button class="open-bot-btn" onclick="checkPayment()">
+    🚀 Open Normal Bot
+  </button>
+
+</div>
+
+<!-- VIP PAYMENT -->
+<div class="payment-box vip-box">
+
+  <h2 style="color:gold;">👑 VIP Bot Access — 150¢</h2>
+
+  <p><strong>VIP Features:</strong></p>
+
+  <p>✔ Advanced Signals</p>
+
+  <p>✔ Faster Predictions</p>
+
+  <p>✔ Premium Access</p>
+
+  <p><strong>Receiver Name:</strong> Patricia Asiedu</p>
+
+  <p><strong>MoMo Number:</strong> 0534494604</p>
+
+  <p><strong>Network:</strong> MTN</p>
+
+  <p>Send VIP payment proof via WhatsApp.</p>
+
+  <button class="copy-btn" onclick="copyNumber()">
+    📋 Copy Number
+  </button>
+
+  <br><br>
+
+  <a 
+  href="https://wa.me/233534494604?text=Hello%20I%20have%20completed%20the%20payment%20for%20the%20VIP%20FS%20Predictor%20Bot.%20Here%20is%20my%20payment%20proof."
+  target="_blank"
+  class="whatsapp-btn">
+    📩 Send VIP Proof
+  </a>
+
+  <br><br>
+
+  <a href="vvip.html" class="vip-btn">
+    👑 Go To VIP BOT
+  </a>
+
+</div>
+
+<script>
+
+function copyNumber(){
+
+  navigator.clipboard.writeText("0534494604");
+
+  alert("MoMo number copied!");
+
+}
+
+function checkPayment(){
+
+  let paid = confirm(
+    "Have you completed the MTN MoMo payment to Patricia Asiedu (0534494604)?"
+  );
+
+  if(paid){
+
+    location.href='bot.html';
+
+  }else{
+
+    alert(
+      "Please complete payment before accessing the bot and send payment proof via WhatsApp."
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

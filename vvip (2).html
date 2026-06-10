@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FS Predictor VIP Bot</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+  min-height:100vh;
+  padding:20px;
+}
+
+/* LOGIN BOX */
+#authBox{
+  width:100%;
+  max-width:360px;
+  margin:60px auto;
+  background:#111827;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+}
+
+.logo{
+  font-size:30px;
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#22c55e;
+}
+
+.sub{
+  color:#94a3b8;
+  margin-bottom:22px;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border:none;
+  border-radius:12px;
+  background:#1e293b;
+  color:white;
+  font-size:15px;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:12px;
+  background:#22c55e;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+#authMsg{
+  margin-top:12px;
+  font-size:14px;
+}
+
+/* APP */
+#app{
+  display:none;
+}
+
+.topbar{
+  background:#111827;
+  padding:18px;
+  border-radius:16px;
+  max-width:520px;
+  margin:0 auto 20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.topbar h2{
+  margin-bottom:12px;
+}
+
+select{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#1e293b;
+  color:white;
+  font-size:15px;
+  margin-top:10px;
+}
+
+/* TERMINAL */
+#terminal{
+  background:#111827;
+  padding:14px;
+  border-radius:14px;
+  max-width:520px;
+  margin:15px auto;
+  height:140px;
+  overflow-y:auto;
+  text-align:left;
+  font-size:13px;
+  color:#22c55e;
+}
+
+/* GRID */
+#grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  max-width:520px;
+  margin:25px auto;
+}
+
+.cell{
+  aspect-ratio:1;
+  background:#1e293b;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  transition:0.25s;
+}
+
+.safe{
+  background:#22c55e;
+  color:#000;
+  transform:scale(1.08);
+  box-shadow:0 0 18px rgba(34,197,94,0.7);
+}
+
+.confidence{
+  text-align:center;
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+  color:#22c55e;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="authBox">
+
+  <div class="logo">FS Predictor</div>
+
+  <div class="sub">VIP Secure Access System</div>
+
+  <input type="text" id="username" placeholder="Enter Username">
+
+  <input type="password" id="password" placeholder="Enter Password">
+
+  <button onclick="login()">Access VIP Bot</button>
+
+  <p id="authMsg"></p>
+
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <div class="topbar">
+
+    <h2>👑 VIP Mines Predictor</h2>
+
+    <p>Advanced AI Prediction System</p>
+
+    <br>
+
+    Safe Spots:
+
+    <br>
+
+    <select id="safeCount">
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="predict()">Start VIP Prediction</button>
+
+  </div>
+
+  <div id="terminal"></div>
+
+  <div class="confidence" id="confidence"></div>
+
+  <div id="grid"></div>
+
+</div>
+
+<script>
+
+/* VIP USERS */
+const paidUsers = [
+
+  {
+    username: "VIPUSER",
+    password: "fG9#kL3t&"
+  }
+
+];
+
+/* LOGIN FUNCTION */
+function login(){
+
+  const u = document.getElementById("username").value.trim();
+
+  const p = document.getElementById("password").value.trim();
+
+  const authMsg = document.getElementById("authMsg");
+
+  authMsg.style.color = "#94a3b8";
+
+  authMsg.textContent = "Verifying VIP access...";
+
+  setTimeout(()=>{
+
+    const valid = paidUsers.find(
+      x => x.username === u && x.password === p
+    );
+
+    if(valid){
+
+      document.getElementById("authBox").style.display = "none";
+
+      document.getElementById("app").style.display = "block";
+
+    }else{
+
+      authMsg.style.color = "#f87171";
+
+      authMsg.textContent = "Invalid username or password";
+
+    }
+
+  },1200);
+
+}
+
+/* TERMINAL */
+function log(msg){
+
+  const t = document.getElementById("terminal");
+
+  const d = document.createElement("div");
+
+  d.textContent = "• " + msg;
+
+  t.appendChild(d);
+
+  t.scrollTop = t.scrollHeight;
+
+}
+
+/* GRID */
+const grid = document.getElementById("grid");
+
+for(let i=0;i<25;i++){
+
+  const c = document.createElement("div");
+
+  c.classList.add("cell");
+
+  c.textContent = "💎";
+
+  grid.appendChild(c);
+
+}
+
+/* PREDICTION */
+function predict(){
+
+  const cells = document.querySelectorAll(".cell");
+
+  const count = parseInt(
+    document.getElementById("safeCount").value
+  );
+
+  cells.forEach(c=>{
+
+    c.classList.remove("safe");
+
+    c.textContent = "💎";
+
+  });
+
+  document.getElementById("terminal").innerHTML = "";
+
+  log("Connecting to VIP server...");
+
+  setTimeout(()=>{
+    log("Analyzing live mine patterns...");
+  },500);
+
+  setTimeout(()=>{
+    log("Running AI prediction engine...");
+  },1000);
+
+  setTimeout(()=>{
+    log("Finding safest positions...");
+  },1500);
+
+  setTimeout(()=>{
+
+    let nums = [...Array(25).keys()]
+    .sort(()=>0.5 - Math.random());
+
+    nums.slice(0,count).forEach(i=>{
+
+      cells[i].classList.add("safe");
+
+      cells[i].textContent = "⭐";
+
+    });
+
+    document.getElementById("confidence").textContent =
+    "VIP Confidence: " +
+    (90 + Math.floor(Math.random()*9)) + "%";
+
+    log("Prediction completed successfully");
+
+  },2200);
+
+}
+
+</script>
+
+</body>
+</html>

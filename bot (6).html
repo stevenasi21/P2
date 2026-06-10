@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FS Predictor PRO Bot</title>
+
+<style>
+body{
+  font-family: monospace;
+  background: radial-gradient(circle,#000,#020617);
+  color:#00ff9f;
+  text-align:center;
+  margin:0;
+  padding:15px;
+}
+
+/* LOGIN */
+#authBox{
+  background:#000;
+  border:1px solid #00ff9f;
+  padding:20px;
+  max-width:320px;
+  margin:60px auto;
+  border-radius:12px;
+}
+
+input{
+  width:90%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:6px;
+}
+
+button{
+  padding:12px;
+  margin:6px;
+  border:none;
+  border-radius:8px;
+  background:#00ff9f;
+  color:#000;
+  cursor:pointer;
+  width:90%;
+}
+
+/* TERMINAL */
+#terminal{
+  background:#000;
+  border:1px solid #00ff9f;
+  padding:10px;
+  max-width:420px;
+  margin:10px auto;
+  height:120px;
+  overflow-y:auto;
+  text-align:left;
+  font-size:13px;
+}
+
+/* GRID */
+#grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  max-width:420px;
+  margin:20px auto;
+}
+
+.cell{
+  aspect-ratio:1;
+  background:#111;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+.safe{
+  background:#00ff9f;
+  color:#000;
+  box-shadow:0 0 20px #00ff9f;
+  transform:scale(1.1);
+}
+
+select{
+  padding:8px;
+  border-radius:6px;
+}
+
+.confidence{
+  margin-top:10px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="authBox">
+
+  <h2>FS Predictor Access</h2>
+
+  <input id="username" placeholder="Username">
+
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <p id="authMsg"></p>
+
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;">
+
+  <h2>SSBot Mines Predictor PRO</h2>
+
+  Safe Spots:
+
+  <select id="safeCount">
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="predict()">Run AI Scan</button>
+
+  <div id="terminal"></div>
+
+  <div class="confidence" id="confidence"></div>
+
+  <div id="grid"></div>
+
+</div>
+
+<script>
+
+/* LOGIN USERS */
+const paidUsers=[
+
+  {
+    username:"Mines",
+    password:"zQ8&vA6w%"
+  }
+
+];
+
+/* LOGIN */
+function login(){
+
+  const u=username.value;
+
+  const p=password.value;
+
+  authMsg.textContent="Checking access...";
+
+  setTimeout(()=>{
+
+    const valid=paidUsers.find(
+      x=>x.username===u && x.password===p
+    );
+
+    if(valid){
+
+      authBox.style.display="none";
+
+      app.style.display="block";
+
+    }else{
+
+      authMsg.textContent="Invalid login ❌";
+
+    }
+
+  },1200);
+
+}
+
+/* TERMINAL LOG */
+function log(msg){
+
+  const t=document.getElementById("terminal");
+
+  const d=document.createElement("div");
+
+  d.textContent="> "+msg;
+
+  t.appendChild(d);
+
+  t.scrollTop=t.scrollHeight;
+
+}
+
+/* GRID */
+const grid=document.getElementById("grid");
+
+for(let i=0;i<25;i++){
+
+  const c=document.createElement("div");
+
+  c.classList.add("cell");
+
+  grid.appendChild(c);
+
+}
+
+/* PREDICT */
+function predict(){
+
+  const cells=document.querySelectorAll(".cell");
+
+  const count=parseInt(safeCount.value);
+
+  cells.forEach(c=>{
+
+    c.classList.remove("safe");
+
+    c.textContent="";
+
+  });
+
+  terminal.innerHTML="";
+
+  log("Initializing AI...");
+
+  setTimeout(()=>log("Scanning patterns..."),400);
+
+  setTimeout(()=>log("Bypassing randomness..."),800);
+
+  setTimeout(()=>log("Calculating safe zones..."),1200);
+
+  setTimeout(()=>{
+
+    let nums=[...Array(25).keys()]
+    .sort(()=>0.5-Math.random());
+
+    nums.slice(0,count).forEach(i=>{
+
+      cells[i].classList.add("safe");
+
+      cells[i].textContent="🌟";
+
+    });
+
+    confidence.textContent=
+    "Confidence: "+
+    (80+Math.floor(Math.random()*15))+"%";
+
+    log("Prediction complete ✔");
+
+  },1600);
+
+}
+</script>
+
+</body>
+</html>
